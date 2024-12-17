@@ -54,6 +54,8 @@ class YoloDataset(Dataset):
         if not cache_path.exists():
             logger.info(f":factory: Generating {phase_name} cache")
             data = self.filter_data(dataset_path, phase_name, self.dynamic_shape)
+            print(f"\n\nlen(data) : {len(data)}")
+            # print(f"data : {data}")
             torch.save(data, cache_path)
         else:
             try:
@@ -88,16 +90,21 @@ class YoloDataset(Dataset):
 
         data = []
         valid_inputs = 0
+        # print(f"images_list : {images_list}")
         for image_name in track(images_list, description="Filtering data"):
             if not image_name.lower().endswith((".jpg", ".jpeg", ".png")):
                 continue
             image_id = Path(image_name).stem
+            # print(f"image_id : {image_id}")
+            # print(f"data_type : {data_type}")
 
             if data_type == "json":
                 image_info = image_info_dict.get(image_id, None)
+                # print(f"image_info : {image_info}")
                 if image_info is None:
                     continue
                 annotations = annotations_index.get(image_info["id"], [])
+                # print(f"annotations : {annotations}")
                 image_seg_annotations = scale_segmentation(annotations, image_info)
             elif data_type == "txt":
                 label_path = labels_path / f"{image_id}.txt"

@@ -111,25 +111,25 @@ dmypy.json
 .prof
 
 # Machine learning specific folders and symlinks
-runs
-/data
-/datasets
-*/data
+# runs
+# /data
+# /datasets
+# */data
 
 # Datasets and model checkpoints
-*.pth
-*.pt
-*.trt
-*.onnx
+# *.pth
+# *.pt
+# *.trt
+# *.onnx
 
-# Image files
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.bmp
-*.tiff
-*.ico
+# # Image files
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+# *.bmp
+# *.tiff
+# *.ico
 
 # Video files
 *.mp4

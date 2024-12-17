@@ -1,0 +1,5 @@
+- task=train
+- task.data.batch_size=8
+- device=mps
+- dataset=coco
+- model=v9-s

@@ -264,10 +264,10 @@ def setup(cfg: Config):
     progress.append(YOLORichProgressBar())
     progress.append(YOLORichModelSummary())
     progress.append(ImageLogger())
-    if cfg.use_tensorboard:
-        loggers.append(TensorBoardLogger(log_graph="all", save_dir=save_path))
-    if cfg.use_wandb:
-        loggers.append(WandbLogger(project="YOLO", name=cfg.name, save_dir=save_path, id=None))
+    # if cfg.use_tensorboard:
+    #     loggers.append(TensorBoardLogger(log_graph="all", save_dir=save_path))
+    # if cfg.use_wandb:
+    #     loggers.append(WandbLogger(project="YOLO", name=cfg.name, save_dir=save_path, id=None))
 
     return progress, loggers, save_path
 

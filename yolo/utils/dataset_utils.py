@@ -22,7 +22,9 @@ def locate_label_paths(dataset_path: Path, phase_name: Path) -> Tuple[Path, Path
     Returns:
         Tuple[Path, Path]: A tuple containing the path to the labels file and the file format ("json" or "txt").
     """
+    print(f"dataset_path : {dataset_path}")
     json_labels_path = dataset_path / "annotations" / f"instances_{phase_name}.json"
+    print(f"json_labels_path : {json_labels_path}")
 
     txt_labels_path = dataset_path / "labels" / phase_name
 
@@ -104,7 +106,14 @@ def scale_segmentation(
         if "segmentation" in anno:
             seg_list = [item for sublist in anno["segmentation"] for item in sublist]
         elif "bbox" in anno:
-            seg_list = anno["bbox"]
+            xmin, ymin, width, height = anno["bbox"]
+            seg_list = [
+                xmin, ymin,
+                xmin + width, ymin,
+                xmin + width, ymin + height,
+                xmin, ymin + height
+            ]
+            # seg_list = anno["bbox"]
         scaled_seg_data = (
             np.array(seg_list).reshape(-1, 2) / [w, h]
         ).tolist()  # make the list group in x, y pairs and scaled with image width, height

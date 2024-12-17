@@ -17,17 +17,18 @@ def main(cfg: Config):
     callbacks, loggers, save_path = setup(cfg)
 
     trainer = Trainer(
-        accelerator="auto",
-        max_epochs=getattr(cfg.task, "epoch", None),
+        accelerator= "auto",
+        max_epochs=100,  # getattr(cfg.task, "epoch", None),
         precision="16-mixed",
         callbacks=callbacks,
-        logger=loggers,
+        # logger=loggers,
         log_every_n_steps=1,
         gradient_clip_val=10,
         deterministic=True,
         enable_progress_bar=not getattr(cfg, "quite", False),
         default_root_dir=save_path,
     )
+    # print(f"cfg : {cfg}")
 
     if cfg.task.task == "train":
         model = TrainModel(cfg)
